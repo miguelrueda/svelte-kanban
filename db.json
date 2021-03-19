@@ -1,0 +1,136 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "title": "Task 1",
+      "description": "Description",
+      "status": 0,
+      "asignee": "miguel.rueda",
+      "type": 0
+    },
+    {
+      "id": 2,
+      "title": "Task 2",
+      "description": "Description",
+      "status": 1,
+      "asignee": "lo.vidal",
+      "type": 0
+    },
+    {
+      "id": 3,
+      "title": "Task 3",
+      "description": "Description",
+      "status": 2,
+      "asignee": "miguel.rueda",
+      "type": 0
+    },
+    {
+      "id": 4,
+      "title": "Task 4",
+      "description": "Description",
+      "status": 1,
+      "asignee": "lo.vidal",
+      "type": 0
+    },
+    {
+      "id": 5,
+      "title": "Task 5",
+      "description": "Description",
+      "status": 3,
+      "asignee": "miguel.rueda",
+      "type": 0
+    },
+    {
+      "id": 6,
+      "title": "Task 6",
+      "description": "Description",
+      "status": 4,
+      "asignee": "miguel.rueda",
+      "type": 0
+    },
+    {
+      "title": "New Task",
+      "description": "New description",
+      "status": 0,
+      "asignee": "lo.vidal",
+      "type": 0,
+      "id": 7
+    },
+    {
+      "title": "new task",
+      "description": "new description",
+      "status": 1,
+      "asignee": "miguel.rueda",
+      "type": 0,
+      "id": 8
+    },
+    {
+      "title": "New task",
+      "description": "New desc",
+      "status": 0,
+      "asignee": "lo.vidal",
+      "type": 1,
+      "id": 9
+    }
+  ],
+  "users": [
+    {
+      "id": 1001,
+      "alias": "miguel.rueda",
+      "name": "Miguel Rueda",
+      "role": "developer"
+    },
+    {
+      "id": 1002,
+      "alias": "lo.vidal",
+      "name": "Lo Vidal",
+      "role": "developer"
+    },
+    {
+      "id": 1003,
+      "alias": "cristiano.ronaldo",
+      "name": "Cristiano Ronaldo",
+      "role": "tester"
+    }
+  ],
+  "status": [
+    {
+      "id": 0,
+      "name": "Backlog"
+    },
+    {
+      "id": 1,
+      "name": "To Do"
+    },
+    {
+      "id": 2,
+      "name": "In Progress"
+    },
+    {
+      "id": 3,
+      "name": "To Validate"
+    },
+    {
+      "id": 4,
+      "name": "Done"
+    }
+  ],
+  "task_types": [
+    {
+      "id": 1,
+      "desc": "User Story"
+    },
+    {
+      "id": 2,
+      "desc": "Bug"
+    },
+    {
+      "id": 3,
+      "desc": "Task"
+    },
+    {
+      "id": 0,
+      "desc": "undefined"
+    }
+  ]
+}
