@@ -5,11 +5,11 @@
   import { Button, Row, Col, Snackbar, Dialog } from "svelte-materialify";
   import Users from "./Users.svelte";
   import CreateTask from "./CreateTask.svelte";
+  import { tasksStore } from "../stores/tasks-store";
+  import { alert } from "../stores/alert-store";
 
-  export let date: Date;
   let snackbar = false;
   let users = [];
-  let tasks = [];
   let groups = [];
   let snackbarContent = "";
   let active1;
@@ -21,7 +21,7 @@
 
   async function fetchTasks() {
     const { data } = await httpGet("/tasks");
-    tasks = data;
+    $tasksStore = data;
   }
 
   async function fetchStatusGroups() {
@@ -75,11 +75,17 @@
       console.log(
         `Move Task ${t.id} from group ${t.status} to new group ${group}`
       );
+      $alert = `The task ${t.id} was updated`;
       t.status = group;
       $: console.log(t);
       updateTask(t);
     });
     console.log(task);
+  }
+
+  function handleTasksUpdated(event) {
+    active1 = false;
+    fetchTasks();
   }
 </script>
 
@@ -113,7 +119,7 @@
             style="height: 85vh"
           >
             <div>
-              {#each tasks.filter((t) => t.status == g) as task, i}
+              {#each $tasksStore.filter((t) => t.status == g) as task, i}
                 <div
                   id={task.id}
                   draggable="true"
@@ -132,7 +138,7 @@
 </div>
 
 <Dialog class="pa-4 text-center" bind:active={active1}>
-  <CreateTask {users} />
+  <CreateTask {users} on:tasks_updated={handleTasksUpdated} />
 </Dialog>
 
 <Snackbar

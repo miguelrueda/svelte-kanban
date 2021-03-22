@@ -13,14 +13,28 @@
     mdiAccountGroup,
     mdiBrightness6,
   } from "@mdi/js";
+  import { onDestroy, onMount } from "svelte";
+  import time from "./stores/time-store";
+  import Alert from "./ui/Alert.svelte";
 
   let theme = "dark";
   let mini = true;
+
+  onMount(() => {});
+
+  onDestroy(() => {});
 
   function toggleTheme() {
     if (theme === "light") theme = "dark";
     else theme = "light";
   }
+
+  const formatter = new Intl.DateTimeFormat("en", {
+    hour12: true,
+    hour: "numeric",
+    minute: "2-digit",
+    second: "2-digit",
+  });
 </script>
 
 <MaterialApp {theme}>
@@ -53,8 +67,10 @@
         </ListItem>
       </List>
     </NavigationDrawer>
+    <Alert />
     <main>
       <h2 class="mb-4">Kanban App</h2>
+      {formatter.format($time)}
       <MainBoard />
     </main>
   </div>

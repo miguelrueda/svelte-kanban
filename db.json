@@ -28,7 +28,7 @@
       "id": 4,
       "title": "Task 4",
       "description": "Description",
-      "status": 1,
+      "status": 3,
       "asignee": "lo.vidal",
       "type": 0
     },
@@ -36,7 +36,7 @@
       "id": 5,
       "title": "Task 5",
       "description": "Description",
-      "status": 3,
+      "status": 4,
       "asignee": "miguel.rueda",
       "type": 0
     },
@@ -44,33 +44,9 @@
       "id": 6,
       "title": "Task 6",
       "description": "Description",
-      "status": 4,
-      "asignee": "miguel.rueda",
-      "type": 0
-    },
-    {
-      "title": "New Task",
-      "description": "New description",
-      "status": 0,
-      "asignee": "lo.vidal",
-      "type": 0,
-      "id": 7
-    },
-    {
-      "title": "new task",
-      "description": "new description",
       "status": 1,
       "asignee": "miguel.rueda",
-      "type": 0,
-      "id": 8
-    },
-    {
-      "title": "New task",
-      "description": "New desc",
-      "status": 0,
-      "asignee": "lo.vidal",
-      "type": 1,
-      "id": 9
+      "type": 0
     }
   ],
   "users": [

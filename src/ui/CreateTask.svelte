@@ -2,8 +2,9 @@
   import { TextField, Row, Col, Button, Select } from "svelte-materialify";
   import type Task from "../core/Task";
   import { httpGet, httpPost } from "../common/api";
-  import { onMount } from "svelte";
+  import { createEventDispatcher, onMount } from "svelte";
   import type User from "../core/User";
+  import { alert } from "../stores/alert-store";
 
   let taskTitle;
   let taskDescription;
@@ -14,6 +15,7 @@
   let taskTypes = [];
   let taskTypesSelect = [];
 
+  const dispatch = createEventDispatcher();
   const requiredRule = [(v) => !!v || "required"];
   const rules = [
     (v) => !!v || "required",
@@ -31,7 +33,10 @@
     $: console.log(task);
     const { ok } = await httpPost("/tasks", task);
     if (ok) {
-      console.log("QUE PASO AQUI?");
+      dispatch("tasks_updated", {
+        text: "success",
+      });
+      $alert = "The task was added";
     }
   }
 
@@ -41,6 +46,7 @@
     users.forEach((u: User) => {
       selectValues.push({ name: u.name, value: u.alias });
     });
+    selectValues.push({ name: "unassigned", value: "ua" });
 
     taskTypes.forEach((t) => {
       taskTypesSelect.push({ name: t.desc, value: t.id });
