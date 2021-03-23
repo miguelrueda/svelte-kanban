@@ -1,19 +1,21 @@
 <script lang="ts">
   import { TextField, Row, Col, Button, Select } from "svelte-materialify";
   import type Task from "../core/Task";
-  import { httpGet, httpPost } from "../common/api";
+  import { httpGet, httpPost, httpPut } from "../common/api";
   import { createEventDispatcher, onMount } from "svelte";
   import type User from "../core/User";
   import { alert } from "../stores/alert-store";
+  import { users } from "../stores/users-store";
+  import { taskTypes } from "../stores/task-types-store";
 
   let taskTitle;
   let taskDescription;
   let taskAsignee;
   let taskType;
-  export let users;
   let selectValues = [];
-  let taskTypes = [];
   let taskTypesSelect = [];
+
+  export let task: Task;
 
   const dispatch = createEventDispatcher();
   const requiredRule = [(v) => !!v || "required"];
@@ -22,46 +24,86 @@
     (v) => v.length <= 50 || "Max 50 characters",
   ];
 
+  async function saveChanges() {
+    if (task) {
+      editTask();
+    } else {
+      addTask();
+    }
+  }
+
+  async function editTask() {
+    let optask: Task = {
+      title: taskTitle,
+      description: taskDescription,
+      status: 0,
+      asignee: taskAsignee,
+      type: taskType,
+      id: task.id,
+    };
+    $: console.log(optask);
+    const { ok } = await httpPut(`/tasks/${task.id}`, optask);
+    if (ok) {
+      dispatch("task_updated", {
+        text: "success",
+      });
+      $alert = "The task was updated";
+    }
+  }
+
   async function addTask() {
-    let task: Task = {
+    let optask: Task = {
       title: taskTitle,
       description: taskDescription,
       status: 0,
       asignee: taskAsignee,
       type: taskType,
     };
-    $: console.log(task);
-    const { ok } = await httpPost("/tasks", task);
+    $: console.log(optask);
+    const { ok } = await httpPost(`/tasks`, optask);
+
     if (ok) {
+      console.log("POST CORRECT?");
       dispatch("tasks_updated", {
         text: "success",
       });
       $alert = "The task was added";
+    } else {
+      console.log("DID NOT WORK");
     }
   }
 
   onMount(async () => {
-    await fetchTaskTypes();
-    $: console.log(taskTypes);
-    users.forEach((u: User) => {
+    $: console.log($taskTypes);
+    $users.forEach((u: User) => {
       selectValues.push({ name: u.name, value: u.alias });
     });
     selectValues.push({ name: "unassigned", value: "ua" });
 
-    taskTypes.forEach((t) => {
+    $taskTypes.forEach((t) => {
       taskTypesSelect.push({ name: t.desc, value: t.id });
     });
-  });
 
-  async function fetchTaskTypes() {
-    const { data } = await httpGet("/task_types");
-    taskTypes = data;
-  }
+    if (task) {
+      console.log(task);
+      taskTitle = task.title;
+      taskDescription = task.description;
+      taskAsignee = task.asignee;
+      taskType = task.type;
+    } else {
+      console.log("It is a new task");
+    }
+  });
 </script>
 
 <Row>
   <Col>
-    <h3>add new task</h3>
+    {#if task}
+      <h3>edit task</h3>
+    {:else}
+      <h3>add new task</h3>
+    {/if}
+
     <br />
     <TextField
       clearable
@@ -84,6 +126,7 @@
       >asignee</Select
     >
     <Select outlined items={taskTypesSelect} bind:value={taskType}>type</Select>
-    <Button depressed class="primary-color" on:click={addTask}>add task</Button>
+
+    <Button depressed class="primary-color" on:click={saveChanges}>save</Button>
   </Col>
 </Row>

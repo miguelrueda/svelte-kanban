@@ -3,27 +3,19 @@
   import { mdiAccount } from "@mdi/js";
   import { onMount } from "svelte";
   import type User from "../core/User";
-  import type Task from "../core/Task";
-  import { httpGet } from "../common/api";
+  import { tasks } from "../stores/tasks-store";
 
   export let user: User;
-  let tasks: Task[] = [];
   let count = 0;
   $: userCount = count;
 
   onMount(async () => {
-    await fetchTasks();
-
     count = getUserTasksCount();
   });
 
-  async function fetchTasks() {
-    const { data } = await httpGet("/tasks");
-    tasks = data;
-  }
-
+  // TODO: When a task is updated, the badge is not updated
   function getUserTasksCount() {
-    return tasks.filter((t) => t.asignee == user.alias).length;
+    return $tasks.filter((t) => t.asignee == user.alias).length;
   }
 </script>
 

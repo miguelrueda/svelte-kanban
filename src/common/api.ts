@@ -12,7 +12,9 @@ export function httpPut(path: string, data: object) {
     return req(path, "PUT", data);
 }
 
-export function httpDelete(path: string) {}
+export function httpDelete(path: string) {
+    return req(path, "DELETE");
+}
 
 async function req(path: string, method: string, data?: object) {
     const res = await fetch(`${serviceUrl}${path}`, {

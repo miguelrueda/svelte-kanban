@@ -20,7 +20,7 @@
       "id": 3,
       "title": "Task 3",
       "description": "Description",
-      "status": 2,
+      "status": 3,
       "asignee": "miguel.rueda",
       "type": 0
     },
@@ -28,7 +28,7 @@
       "id": 4,
       "title": "Task 4",
       "description": "Description",
-      "status": 3,
+      "status": 2,
       "asignee": "lo.vidal",
       "type": 0
     },
@@ -47,6 +47,14 @@
       "status": 1,
       "asignee": "miguel.rueda",
       "type": 0
+    },
+    {
+      "title": "Task 7",
+      "description": "The description",
+      "status": 0,
+      "asignee": "cristiano.ronaldo",
+      "type": 3,
+      "id": 7
     }
   ],
   "users": [

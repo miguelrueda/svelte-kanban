@@ -16,11 +16,19 @@
   import { onDestroy, onMount } from "svelte";
   import time from "./stores/time-store";
   import Alert from "./ui/Alert.svelte";
+  import { initStores } from "./stores/init-stores";
+  import { tasks } from "./stores/tasks-store";
+  import { users } from "./stores/users-store";
 
   let theme = "dark";
   let mini = true;
 
-  onMount(() => {});
+  onMount(async () => {
+    await initStores();
+
+    console.log($tasks);
+    console.log($users);
+  });
 
   onDestroy(() => {});
 

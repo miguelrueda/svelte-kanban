@@ -2,33 +2,29 @@
   import { onMount } from "svelte";
   import { httpGet, httpPut } from "../common/api";
   import TaskCard from "./TaskCard.svelte";
-  import { Button, Row, Col, Snackbar, Dialog } from "svelte-materialify";
+  import {
+    Button,
+    Row,
+    Col,
+    Snackbar,
+    Dialog,
+    ListItem,
+    Menu,
+    List,
+  } from "svelte-materialify";
   import Users from "./Users.svelte";
   import CreateTask from "./CreateTask.svelte";
-  import { tasksStore } from "../stores/tasks-store";
+  import { tasks } from "../stores/tasks-store";
+  import { users } from "../stores/users-store";
   import { alert } from "../stores/alert-store";
+  import { groups } from "../stores/groups-store";
+  import { fetchTasks } from "../stores/init-stores";
 
   let snackbar = false;
-  let users = [];
-  let groups = [];
   let snackbarContent = "";
-  let active1;
+  let snackbarActive;
 
-  async function fetchUsers() {
-    const { data } = await httpGet("/users");
-    users = data;
-  }
-
-  async function fetchTasks() {
-    const { data } = await httpGet("/tasks");
-    $tasksStore = data;
-  }
-
-  async function fetchStatusGroups() {
-    const { data } = await httpGet("/status");
-    groups = data;
-  }
-
+  // TODO: How to refactor this tasks?
   async function fetchTask(id: number) {
     const { data } = await httpGet(`/tasks/${id}`);
     return data;
@@ -41,11 +37,8 @@
     }
   }
 
-  onMount(() => {
-    fetchUsers();
-    fetchTasks();
-    fetchStatusGroups();
-  });
+  // TODO: If data is not fetch, the UI appears empty
+  onMount(async () => {});
 
   function handleDragStart(event) {
     let attributeId = event.target.getAttribute("id");
@@ -63,6 +56,7 @@
     event.dataTransfer.dropEffect = "move";
   }
 
+  // TODO: if the same tasks is dropped, the message does not appear
   function drop(event, group) {
     event.preventDefault();
     console.log("drop called");
@@ -84,25 +78,25 @@
   }
 
   function handleTasksUpdated(event) {
-    active1 = false;
+    snackbarActive = false;
     fetchTasks();
   }
 </script>
 
 <div>
   <div>
-    <Users {users} />
+    <Users />
   </div>
   <div class="text-center">
     <Button
       on:click={() => {
-        active1 = true;
+        snackbarActive = true;
       }}>Add new Task</Button
     >
   </div>
   <div class="container">
-    <Row class="align-start" noGutters>
-      {#each groups as group, g}
+    <Row class="align-start" noGutters style={"border: 1px solid black;"}>
+      {#each $groups as group, g}
         <Col style={"border: 1px solid black; height: 90vh"}>
           <div
             class="pa-2"
@@ -119,7 +113,7 @@
             style="height: 85vh"
           >
             <div>
-              {#each $tasksStore.filter((t) => t.status == g) as task, i}
+              {#each $tasks.filter((t) => t.status == g) as task, i}
                 <div
                   id={task.id}
                   draggable="true"
@@ -137,8 +131,8 @@
   <!--container-->
 </div>
 
-<Dialog class="pa-4 text-center" bind:active={active1}>
-  <CreateTask {users} on:tasks_updated={handleTasksUpdated} />
+<Dialog class="pa-4 text-center" bind:active={snackbarActive}>
+  <CreateTask on:tasks_updated={handleTasksUpdated} />
 </Dialog>
 
 <Snackbar
