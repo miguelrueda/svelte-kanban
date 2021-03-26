@@ -25,7 +25,7 @@
       }}>Add new Task</Button
     >
   </div>
-  <div class="" style="border: 1px solid green; overflow: scroll;">
+  <div class="" style="overflow: scroll;">
     <Tasks />
   </div>
 </div>

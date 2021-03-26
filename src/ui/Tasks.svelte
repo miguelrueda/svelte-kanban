@@ -99,7 +99,12 @@
           <div class="pa-2">
             {group.name}
           </div>
-          <div on:drop={(e) => drop(e, g)} on:dragover={dragover} style="">
+          <div
+            on:drop={(e) => drop(e, g)}
+            on:dragover={dragover}
+            style=""
+            class="lane"
+          >
             <div>
               {#each $tasks.filter((t) => t.status == g) as task, i}
                 <div
@@ -124,6 +129,9 @@
 
 <style>
   .container {
-    border: 1px solid aqua;
+  }
+
+  .lane {
+    height: 100vh;
   }
 </style>

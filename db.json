@@ -43,7 +43,7 @@
     {
       "title": "Task 6",
       "description": "Description for task 6",
-      "status": 0,
+      "status": 2,
       "asignee": "cristiano.ronaldo",
       "type": 2,
       "id": 6,
@@ -52,7 +52,7 @@
     {
       "title": "Task 7",
       "description": "The description",
-      "status": 0,
+      "status": 1,
       "asignee": "cristiano.ronaldo",
       "type": 3,
       "id": 7,
@@ -70,7 +70,7 @@
     {
       "title": "Task 11",
       "description": "Task 11",
-      "status": 1,
+      "status": 0,
       "asignee": "cristiano.ronaldo",
       "type": 2,
       "id": 9,
