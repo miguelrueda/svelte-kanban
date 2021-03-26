@@ -13,6 +13,7 @@ export async function initStores() {
 
 export async function fetchTasks() {
     const { data } = await httpGet("/tasks");
+    $: console.log(data);
     tasks.set(data);
   }
 

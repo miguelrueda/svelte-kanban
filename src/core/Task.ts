@@ -5,5 +5,6 @@ export default interface Task {
     status: number;
     asignee: string;
     type: number;
+    linked?: number
   }
   

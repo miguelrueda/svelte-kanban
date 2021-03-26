@@ -1,52 +1,53 @@
 {
   "tasks": [
     {
-      "id": 1,
       "title": "Task 1",
       "description": "Description",
       "status": 0,
-      "asignee": "miguel.rueda",
-      "type": 0
+      "asignee": "lo.vidal",
+      "type": 1,
+      "id": 1
     },
     {
-      "id": 2,
       "title": "Task 2",
       "description": "Description",
       "status": 1,
       "asignee": "lo.vidal",
-      "type": 0
+      "type": 1,
+      "id": 2
     },
     {
-      "id": 3,
       "title": "Task 3",
       "description": "Description",
       "status": 3,
       "asignee": "miguel.rueda",
-      "type": 0
+      "type": 2,
+      "id": 3
     },
     {
-      "id": 4,
       "title": "Task 4",
       "description": "Description",
       "status": 2,
       "asignee": "lo.vidal",
-      "type": 0
+      "type": 2,
+      "id": 4
     },
     {
-      "id": 5,
       "title": "Task 5",
       "description": "Description",
       "status": 4,
       "asignee": "miguel.rueda",
-      "type": 0
+      "type": 2,
+      "id": 5
     },
     {
-      "id": 6,
       "title": "Task 6",
-      "description": "Description",
-      "status": 1,
-      "asignee": "miguel.rueda",
-      "type": 0
+      "description": "Description for task 6",
+      "status": 0,
+      "asignee": "cristiano.ronaldo",
+      "type": 2,
+      "id": 6,
+      "linked": 1
     },
     {
       "title": "Task 7",
@@ -54,7 +55,26 @@
       "status": 0,
       "asignee": "cristiano.ronaldo",
       "type": 3,
-      "id": 7
+      "id": 7,
+      "linked": 1
+    },
+    {
+      "title": "Task 10",
+      "description": "Task 10",
+      "status": 0,
+      "asignee": "cristiano.ronaldo",
+      "type": 2,
+      "linked": 2,
+      "id": 8
+    },
+    {
+      "title": "Task 11",
+      "description": "Task 11",
+      "status": 1,
+      "asignee": "cristiano.ronaldo",
+      "type": 2,
+      "id": 9,
+      "linked": []
     }
   ],
   "users": [

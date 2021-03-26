@@ -25,6 +25,12 @@ async function req(path: string, method: string, data?: object) {
         body: data && JSON.stringify(data)
     });
     const json = await res.json();
-    return { ok: res.ok, data:json };
+    $: console.log(json);
+    if (res.ok) {
+        return { ok: res.ok, data:json };
+    } else {
+        return undefined;
+    }
+    
 }
 
